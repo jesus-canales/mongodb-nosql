@@ -9,13 +9,15 @@ use("cell_store")
 
 // Crear colección
 db.products.insertOne({
-    name: "Samsung",
+    _id: 1,
+    name: "Vivo",
     price: 3500
 })
 
 
 db.products.insertOne({
-    name: "Xiaomi",
+    _id: 2,
+    name: "Reno",
     price: 2500,
     color: "negro",
     ram: "16gb"
