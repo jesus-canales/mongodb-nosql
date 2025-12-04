@@ -4,7 +4,7 @@ use('dbGastroManager')
 // Actualizar el precio de la limonada frozen
 db.menu.updateOne(
     {nombre: "Limonada Frozen"}, // condición para la actualización
-    {$set: { precio: 15 }} // nuevo valor actualizado
+    {se$t: { precio: 15 }} // nuevo valor actualizado
 )
 
 // Listar todos los documentos
