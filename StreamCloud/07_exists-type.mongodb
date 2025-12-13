@@ -1,0 +1,10 @@
+// Crear base de datos
+use("dbStreamCloud")
+
+// Verificar que documentos no tienen el atributo vistas
+// db.catalogo.find({
+    //temporadas: { $exists: false }
+//}) //
+
+// Auditoría de tipos de datos
+db.catalogo.find({ titulo: {$type: "string"}})
