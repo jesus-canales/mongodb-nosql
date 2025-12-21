@@ -1,0 +1,19 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// ¿Cuáles son las 5 sesiones donde más calorías se quemaron en promedio?
+db.sesiones.aggregate([
+    {   // Seleccionamos los atributos que se mostraran
+        $project: {
+            tipo_clase: 1,
+            calorias_quemadas_avg: 1
+        }},
+    {$sort: { calorias_quemadas_avg: -1}}, // establecemos el orden descendente
+    {$limit: 5} // limitamos a los 5 primeros resultados
+]);
+
+// En esta propuesta se traen todos los atributos referentes a la consulta
+db.sesiones.aggregate([
+    {$sort: { calorias_quemadas_avg: -1 }},
+    {$limit: 5}
+]);
