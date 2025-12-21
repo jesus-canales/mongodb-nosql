@@ -1,0 +1,12 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// ¿Cuál es el peso promedio de los hombres y las mujeres en el gimnasio?
+db.miembros.aggregate([
+    {
+        $group: { 
+            _id: "$genero", // agrupando de acuerdo al género de los miembros
+            pesoPromedio: { $avg: "$medidas.peso_kg" } // obtener promedio
+        }
+    }
+]);
