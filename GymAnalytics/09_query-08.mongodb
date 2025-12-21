@@ -1,0 +1,16 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// Calcula la rentabilidad neta por miembro, asumiendo que el costo operativo es el 40% de lo que han pagado.
+db.miembros.aggregate([
+    {
+        $project: {
+            _id: 1, nombre: 1, plan: 1, pagos_acumulados: 1,
+            costo_operativo: { // obteniendo el 40% de costo operativo
+                $multiply: ["$pagos_acumulados", 0.40] 
+            }, 
+            rentabilidad_neta: { $multiply: ["$pagos_acumulados", 0.60]}
+            // obteniendo el 60% de rentabilidad neta
+        }},
+    { $sort: { rentabilidad_neta: -1 } }
+]);
