@@ -1,0 +1,12 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// ¿Cuánto dinero hemos recaudado en total por cada plan?
+db.miembros.aggregate([
+    { $group: {
+      _id: "$plan", // agruparemos de acuerdo al plan
+      dineroRecaudado: { $sum: "$pagos_acumulados"} // sumar los pagos acumulados
+    }},
+    // ordenar desde el que ha tenido mayor pago hasta el de menor pago
+    {$sort: {dineroRecaudado: -1}}
+])
