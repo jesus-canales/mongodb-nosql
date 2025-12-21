@@ -1,0 +1,20 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// Calcula el IMC de cada miembro - Fórmula: Peso (kg) / Altura (m)²
+db.miembros.aggregate([
+    {
+        $project: {
+            nombre: 1,
+            // Altura está en cm, hay que dividir entre 100
+            altura_m: { $divide: ["$medidas.altura_cm", 100] },
+            imc: {
+                $divide: [
+                    "$medidas.peso_kg",
+                    { $pow: [{ $divide: ["$medidas.altura_cm", 100] }, 2] } 
+                    // Altura en metros al cuadrado
+                ]
+            }
+        }
+    }
+]);

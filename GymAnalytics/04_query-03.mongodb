@@ -1,0 +1,18 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// Si aumentamos la membresía un 15% y aplicamos un impuesto del 18%, ¿cuánto pagarían en total los miembros Platinum?
+db.miembros.aggregate([
+    { $match: { plan: "Platinum" } },
+    {
+        $project: { nombre: 1, pago_actual: "$pagos_acumulados",
+            pago_proyectado: {
+                $multiply: [
+                    "$pagos_acumulados",
+                    1.15, // Aumento del 15%
+                    1.18  // Impuesto del 18%
+                ]
+            }
+        }
+    }
+])
