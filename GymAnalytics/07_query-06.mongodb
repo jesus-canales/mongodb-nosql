@@ -1,0 +1,13 @@
+// Usar la base de datos
+use('dbGymAnalytics');
+
+// De las clases de tipo 'Crossfit', ¿cuál es la duración promedio que imparte cada entrenador?
+db.sesiones.aggregate([
+    {$match: {tipo_clase: "Crossfit"}}, // identificando actividad
+    {
+        $group: {
+          _id: "$entrenador", // agrupamos por entrenador
+          tiempoEstimado: { $avg: "$duracion_minutos"} // calculamos el promedio
+        }
+    }
+]);
